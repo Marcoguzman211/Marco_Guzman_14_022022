@@ -1,10 +1,31 @@
-import {useFormik} from "formik";
+import { useFormik } from "formik";
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
+
 const Form = () => {
 	const formik = useFormik({
 		initialValues: {
 			firstName: '',
 			lastName: '',
 			email: '',
+			birthDate: null,
+		},
+		validate: values => {
+			const errors = {};
+			if (!values.birthDate) {
+				errors.birthDate = 'Required';
+			} else {
+				const minDate = new Date();
+				minDate.setFullYear(minDate.getFullYear() - 18);
+				const maxDate = new Date();
+				maxDate.setFullYear(1900);
+				if (values.birthDate > minDate) {
+					errors.birthDate = 'You must be at least 18 years old';
+				} else if (values.birthDate < maxDate) {
+					errors.birthDate = 'Birthdate must be after 1900';
+				}
+			}
+			return errors;
 		},
 		onSubmit: values => {
 			alert(JSON.stringify(values, null, 2));
@@ -45,8 +66,30 @@ const Form = () => {
 						onChange={formik.handleChange}
 						value={formik.values.lastName}
 					/>
-					<button type="submit"
-					        className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
+
+					<label
+						htmlFor="birthDate"
+						className="text-sm font-medium"
+					>Birth Date</label>
+					<DatePicker
+						id="birthDate"
+						name="birthDate"
+						className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+						selected={formik.values.birthDate}
+						onChange={date => formik.setFieldValue('birthDate', date)}
+						dateFormat="MM/dd/yyyy"
+						showYearDropdown
+						yearDropdownItemNumber={100}
+						maxDate={new Date()}
+						minDate={new Date(1900, 0, 1)}
+					/>
+					{formik.errors.birthDate && formik.touched.birthDate && (
+						<div className="text-red-500 text-sm">{formik.errors.birthDate}</div>
+					)}
+
+					<button
+						type="submit"
+						className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
 					>
 						Submit
 					</button>
