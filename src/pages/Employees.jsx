@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import Footer from "../components/Footer";
 
 const Employees = () => {
 	return (
@@ -9,6 +10,7 @@ const Employees = () => {
 					className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
 				>Back to home</button>
 			</Link>
+			<Footer />
 		</div>
 	);
 }

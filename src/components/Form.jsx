@@ -1,6 +1,8 @@
-import { useFormik } from "formik";
+import {useFormik} from "formik";
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
+import US_STATES from "../utils/US_STATES";
+import DEPARTMENTS from "../utils/DEPARTMENTS";
 
 const Form = () => {
 	const formik = useFormik({
@@ -8,21 +10,28 @@ const Form = () => {
 			firstName: '',
 			lastName: '',
 			email: '',
-			birthDate: null,
+			dateOfBirth: null,
+			startDate: null,
+			street: "",
+			city: "",
+			state: "",
+			zipCode: "",
+			department: "",
+
 		},
 		validate: values => {
 			const errors = {};
-			if (!values.birthDate) {
-				errors.birthDate = 'Required';
+			if (!values.dateOfBirth) {
+				errors.dateOfBirth = 'Required';
 			} else {
 				const minDate = new Date();
 				minDate.setFullYear(minDate.getFullYear() - 18);
 				const maxDate = new Date();
 				maxDate.setFullYear(1900);
-				if (values.birthDate > minDate) {
-					errors.birthDate = 'You must be at least 18 years old';
-				} else if (values.birthDate < maxDate) {
-					errors.birthDate = 'Birthdate must be after 1900';
+				if (values.dateOfBirth > minDate) {
+					errors.dateOfBirth = 'You must be at least 18 years old';
+				} else if (values.dateOfBirth < maxDate) {
+					errors.dateOfBirth = 'Birthdate must be after 1900';
 				}
 			}
 			return errors;
@@ -68,30 +77,117 @@ const Form = () => {
 					/>
 
 					<label
-						htmlFor="birthDate"
+						htmlFor="dateOfBirth"
 						className="text-sm font-medium"
-					>Birth Date</label>
+					>Date of Birth</label>
 					<DatePicker
-						id="birthDate"
-						name="birthDate"
+						id="dateOfBirth"
+						name="dateOfBirth"
 						className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
-						selected={formik.values.birthDate}
-						onChange={date => formik.setFieldValue('birthDate', date)}
-						dateFormat="MM/dd/yyyy"
+						selected={formik.values.dateOfBirth}
+						onChange={date => formik.setFieldValue('dateOfBirth', date)}
+						dateFormat="dd/MM/yyyy"
 						showYearDropdown
 						yearDropdownItemNumber={100}
 						maxDate={new Date()}
 						minDate={new Date(1900, 0, 1)}
 					/>
-					{formik.errors.birthDate && formik.touched.birthDate && (
-						<div className="text-red-500 text-sm">{formik.errors.birthDate}</div>
+					{formik.errors.dateOfBirth && formik.touched.dateOfBirth && (
+						<div className="text-red-500 text-sm">{formik.errors.dateOfBirth}</div>
 					)}
-
+					<label htmlFor="startDate" className="text-sm font-medium">Start Date</label>
+					<DatePicker
+						id="startDate"
+						name="startDate"
+						className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+						selected={formik.values.startDate}
+						onChange={date => formik.setFieldValue('startDate', date)}
+						dateFormat="dd/MM/yyyy"
+						maxDate={new Date()}
+						minDate={new Date(2000, 0, 1)}
+						yearDropdownItemNumber={100}
+						showYearDropdown
+					/>
+					{formik.errors.startDate && formik.touched.startDate && (
+						<div className="text-red-500 text-sm">{formik.errors.startDate}</div>
+					)}
+					<fieldset className="border border-gray-200 p-4 rounded-lg">
+						<legend className="text-lg font-medium mb-2">Address</legend>
+						<label
+							htmlFor="street"
+							className="text-sm font-medium"
+						>Street</label>
+						<input
+							id="street"
+							name="street"
+							className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+							type="text"
+							onChange={formik.handleChange}
+							value={formik.values.street}
+						/>
+						<label
+							htmlFor="city"
+							className="text-sm font-medium"
+						>City</label>
+						<input
+							id="city"
+							name="city"
+							className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+							type="text"
+							onChange={formik.handleChange}
+							value={formik.values.city}
+						/>
+						<label htmlFor="state" className="text-sm font-medium">State</label>
+						<select
+							id="state"
+							name="state"
+							className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+							onChange={formik.handleChange}
+							value={formik.values.state}
+						>
+							<option value="">Select a state</option>
+							{US_STATES.map(state => (
+								<option key={state.abbreviation} value={state.name}>{state.name}</option>
+							))}
+						</select>
+						{formik.errors.state && formik.touched.state && (
+							<div className="text-red-500 text-sm">{formik.errors.state}</div>
+						)}
+						<label htmlFor="zipCode" className="text-sm font-medium">Zip Code</label>
+						<input
+							id="zipCode"
+							name="zipCode"
+							className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+							type="text"
+							pattern="[0-9]*"
+							onChange={formik.handleChange}
+							value={formik.values.zipCode}
+						/>
+						{formik.errors.zipCode && formik.touched.zipCode && (
+							<div className="text-red-500 text-sm">{formik.errors.zipCode}</div>
+						)}
+					</fieldset>
+					<label htmlFor="department" className="text-sm font-medium">Department</label>
+					<select
+						id="department"
+						name="department"
+						className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+						onChange={formik.handleChange}
+						value={formik.values.department}
+					>
+						{/*<option value="">Department</option>*/}
+						{DEPARTMENTS.map(department => (
+							<option key={department.name} value={department.name}>{department.name}</option>
+						))}
+					</select>
+					{formik.errors.department && formik.touched.department && (
+						<div className="text-red-500 text-sm">{formik.errors.department}</div>
+					)}
 					<button
 						type="submit"
 						className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
 					>
-						Submit
+						Save
 					</button>
 				</form>
 			</div>
