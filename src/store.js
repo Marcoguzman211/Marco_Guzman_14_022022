@@ -1,13 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import employeeReducer from "./feature/employeeSlice";
+import employeesReducer from "./feature/employeeSlice";
 
+// Reducers can be added to the store using the `reducer` option.
 const reducer = {
-	auth: employeeReducer,
+	employees: employeesReducer,
 };
 
 const store = configureStore({
 	reducer: reducer,
-	devTools: true,
 });
-
 export default store;

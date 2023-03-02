@@ -1,7 +1,9 @@
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
-const HomeHeader = (
-) => {
+const HRHeader = () => {
+	const location = useLocation();
+	const to = location.pathname === "/" ? "/employees" : "/";
+	const buttonText = location.pathname === "/" ? "View current employees" : "Back to home";
 	return (
 		<>
 			<header aria-label="Page Header">
@@ -14,12 +16,12 @@ const HomeHeader = (
 						</div>
 
 						<div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
-							<Link to={"/employees"}>
+							<Link to={to}>
 								<button
 									className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
 									type="button"
 								>
-									View current employees
+									{buttonText}
 								</button>
 							</Link>
 						</div>
@@ -29,4 +31,4 @@ const HomeHeader = (
 		</>
 	)
 };
-export default HomeHeader;
+export default HRHeader;

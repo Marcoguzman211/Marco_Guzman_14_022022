@@ -1,28 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
+import INITIAL_EMPLOYEES from "../utils/INITIAL_EMPLOYEES";
 
 const initialState = {
-	user: null,
-	isSuccess: false,
-	token: null,
+	employees: INITIAL_EMPLOYEES,
 };
 
-export const employeeSlice = createSlice({
-	name: "auth",
+export const employeesSlice = createSlice({
+	name: "employees",
 	initialState,
 	reducers: {
-		setUser: (state, action) => {
-			state.user = action.payload;
-		},
-		logout: (state) => {
-			state.user = null;
-			state.token = null;
-		},
-		setToken: (state, action) => {
-			state.token = action.payload;
-			state.isSuccess = true;
+		addEmployee: (state, action) => {
+			// Check if employee already exists
+			const { firstName, lastName, dateOfBirth } = action.payload;
+			const employeeExists = state.employees.some(
+				employee =>
+					employee.firstName === firstName &&
+					employee.lastName === lastName &&
+					employee.dateOfBirth === dateOfBirth
+			);
+			if (employeeExists) {
+				// Employee already exists, do not add it again
+				return;
+			}
+			// Add employee to state
+			state.employees.unshift(action.payload);
 		},
 	},
 });
 
-export const { setUser, updateUser, setToken, logout } = employeeSlice.actions;
-export default employeeSlice.reducer;
+export const { addEmployee } = employeesSlice.actions;
+export default employeesSlice.reducer;

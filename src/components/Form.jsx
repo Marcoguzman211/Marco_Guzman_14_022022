@@ -3,8 +3,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import US_STATES from "../utils/US_STATES";
 import DEPARTMENTS from "../utils/DEPARTMENTS";
+import { useDispatch } from 'react-redux';
+import { addEmployee } from '../feature/employeeSlice';
 
 const Form = () => {
+	const dispatch = useDispatch();
 	const formik = useFormik({
 		initialValues: {
 			firstName: '',
@@ -21,8 +24,8 @@ const Form = () => {
 		},
 		validate: values => {
 			const errors = {};
-			if (!values.dateOfBirth) {
-				errors.dateOfBirth = 'Required';
+			if (!values.dateOfBirth || !values.lastName || !values.firstName){
+				errors.dateOfBirth = 'This field is Required';
 			} else {
 				const minDate = new Date();
 				minDate.setFullYear(minDate.getFullYear() - 18);
@@ -37,7 +40,7 @@ const Form = () => {
 			return errors;
 		},
 		onSubmit: values => {
-			alert(JSON.stringify(values, null, 2));
+			dispatch(addEmployee(values));
 		},
 	});
 	return (
