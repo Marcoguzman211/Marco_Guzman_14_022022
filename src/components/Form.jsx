@@ -5,8 +5,11 @@ import US_STATES from "../utils/US_STATES";
 import DEPARTMENTS from "../utils/DEPARTMENTS";
 import { useDispatch } from 'react-redux';
 import { addEmployee } from '../feature/employeeSlice';
+import Modal from "./Modal";
+import {useState} from "react";
 
 const Form = () => {
+	const [showModal, setShowModal] = useState(false);
 	const dispatch = useDispatch();
 	const formik = useFormik({
 		initialValues: {
@@ -41,6 +44,8 @@ const Form = () => {
 		},
 		onSubmit: values => {
 			dispatch(addEmployee(values));
+			setShowModal(true);
+			console.log(values);
 		},
 	});
 	return (
@@ -49,6 +54,11 @@ const Form = () => {
 				<h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
 					Create Employee
 				</h1>
+				{showModal && <Modal setShowModal={setShowModal}
+				                     employeeName={formik.values.firstName + " "  + formik.values.lastName}
+				                     onClose={() => setShowModal(false)}
+				/>
+				}
 				<form
 					onSubmit={formik.handleSubmit}
 					className="mt-6 mb-0 space-y-4 rounded-lg p-8 shadow-2xl"
