@@ -3,19 +3,24 @@ import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import US_STATES from "../utils/US_STATES";
 import DEPARTMENTS from "../utils/DEPARTMENTS";
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { addEmployee } from '../feature/employeeSlice';
-import Modal from "./Modal";
+/*import Modal from "./Modal";*/
 import {useState} from "react";
+import Modal from "./Modal";
+import {useNavigate} from "react-router-dom";
+
 
 const Form = () => {
+	const allEmployees = useSelector((state) => state.employees.employees);
+	const navigate = useNavigate();
 	const [showModal, setShowModal] = useState(false);
 	const dispatch = useDispatch();
 	const formik = useFormik({
 		initialValues: {
-			firstName: '',
-			lastName: '',
-			email: '',
+			firstName: "",
+			lastName: "",
+			email: "",
 			dateOfBirth: null,
 			startDate: null,
 			street: "",
@@ -27,8 +32,11 @@ const Form = () => {
 		},
 		validate: values => {
 			const errors = {};
-			if (!values.dateOfBirth || !values.lastName || !values.firstName){
+			/*if (!values.firstName || !values.lastName || !values.dateOfBirth ){
 				errors.dateOfBirth = 'This field is Required';
+			}*/ if (!values.firstName){
+				errors.firstName = 'This field is Required';
+
 			} else {
 				const minDate = new Date();
 				minDate.setFullYear(minDate.getFullYear() - 18);
@@ -42,21 +50,42 @@ const Form = () => {
 			}
 			return errors;
 		},
-		onSubmit: values => {
-			dispatch(addEmployee(values));
-			setShowModal(true);
-			console.log(values);
-		},
+		onSubmit: (values, { setSubmitting, setErrors}) => {
+			try {
+				// Check if employee already exists
+				const { firstName, lastName } = values;
+				const employeeExists = allEmployees.some(
+					employee =>
+						employee.firstName === firstName &&
+						employee.lastName === lastName
+				);
+				if (employeeExists) {
+					setErrors({form: "This employee already exists."});
+					return;
+				}
+					dispatch(addEmployee(values));
+					setSubmitting(false);
+					setShowModal(true);
+
+			} catch (error) {
+				setSubmitting(false);
+				setErrors({form: "Error submitting form"});
+				console.error("Error submitting form: ", error);
+			}
+		}
 	});
 	return (
-		<div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+		<div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8" data-testid="home-component">
 			<div className="mx-auto max-w-lg">
 				<h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
 					Create Employee
 				</h1>
 				{showModal && <Modal setShowModal={setShowModal}
 				                     employeeName={formik.values.firstName + " "  + formik.values.lastName}
-				                     onClose={() => setShowModal(false)}
+				                     onClose={() => {
+					                     setShowModal(false)
+					                     navigate('/employees')
+				                     }}
 				/>
 				}
 				<form
@@ -75,7 +104,9 @@ const Form = () => {
 						onChange={formik.handleChange}
 						value={formik.values.firstName}
 					/>
-
+					{formik.errors.firstName && formik.touched.firstName && (
+						<div className="text-red-500 text-sm">{formik.errors.firstName}</div>
+					)}
 					<label
 						htmlFor="lastName"
 						className="text-sm font-medium"
@@ -88,7 +119,9 @@ const Form = () => {
 						onChange={formik.handleChange}
 						value={formik.values.lastName}
 					/>
-
+					{formik.errors.lastName && formik.touched.lastName && (
+						<div className="text-red-500 text-sm">{formik.errors.lastName}</div>
+					)}
 					<label
 						htmlFor="dateOfBirth"
 						className="text-sm font-medium"
@@ -202,6 +235,9 @@ const Form = () => {
 					>
 						Save
 					</button>
+					{formik.errors.form && (
+						<div className="text-red-500 text-sm">{formik.errors.form}</div>
+					)}
 				</form>
 			</div>
 		</div>

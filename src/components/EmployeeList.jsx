@@ -5,15 +5,18 @@ import Pagination from 'react-bootstrap/Pagination';
 import Form from 'react-bootstrap/Form';
 
 const EmployeeList = () => {
+	// Select all employees from the Redux store
 	const allEmployees = useSelector((state) => state.employees.employees);
+	// Set up the current page to be displayed initially as page 1
 	const [currentPage, setCurrentPage] = useState(1);
+	// Set up the number of employees to be displayed per page to 5
 	const [employeesPerPage] = useState(5);
-	/*const indexOfLastEmployee = currentPage * employeesPerPage;*/
-	/*const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;*/
-	/*const employees = allEmployees.slice(indexOfFirstEmployee, indexOfLastEmployee);*/
+	// Set up the search term for filtering employees initially as an empty string
 	const [searchTerm, setSearchTerm] = useState('');
+	// Set up the initial sort order to be ascending
 	const [sortOrder, setSortOrder] = useState('asc');
-	const [sortColumn, setSortColumn] = useState('firstName');
+	// Set up the initial sort column to be 'firstName'
+	const [sortColumn, setSortColumn] = useState('lastName');
 
 	const handleSearch = (event) => {
 		setSearchTerm(event.target.value);
@@ -38,6 +41,7 @@ const EmployeeList = () => {
 		return `${day}/${month}/${year}`;
 	};
 
+
 	const filterEmployees = (employees) => {
 		const searchTermLowerCase = searchTerm.toLowerCase();
 		return employees.filter((employee) => {
@@ -53,6 +57,8 @@ const EmployeeList = () => {
 		});
 	};
 
+	/* This code is sorting an array of employees based on a selected column and a selected sort order.
+	* */
 	const sortedEmployees = filterEmployees(allEmployees).sort((a, b) => {
 		const columnA = a[sortColumn].toLowerCase();
 		const columnB = b[sortColumn].toLowerCase();
@@ -64,12 +70,16 @@ const EmployeeList = () => {
 		}
 		return 0;
 	});
-
+	/*
+	* The result is a new array containing only the employees that should be displayed on the current page.
+	* */
 	const currentEmployees = sortedEmployees.slice(
 		(currentPage - 1) * employeesPerPage,
 		currentPage * employeesPerPage
 	);
-
+	/*
+	* This code generates an array of page numbers based on the number of items per page and the total number of items to be paginated.
+	* */
 	const pageNumbers = [];
 	for (let i = 1; i <= Math.ceil(sortedEmployees.length / employeesPerPage); i++) {
 		pageNumbers.push(i);

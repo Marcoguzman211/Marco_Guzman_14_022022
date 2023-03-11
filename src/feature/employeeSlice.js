@@ -11,12 +11,11 @@ export const employeesSlice = createSlice({
 	reducers: {
 		addEmployee: (state, action) => {
 			// Check if employee already exists
-			const { firstName, lastName, dateOfBirth } = action.payload;
+			const { firstName, lastName } = action.payload;
 			const employeeExists = state.employees.some(
 				employee =>
 					employee.firstName === firstName &&
-					employee.lastName === lastName &&
-					employee.dateOfBirth === dateOfBirth
+					employee.lastName === lastName
 			);
 			if (employeeExists) {
 				// Employee already exists, do not add it again
