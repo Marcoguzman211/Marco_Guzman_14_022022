@@ -37,6 +37,12 @@ const Form = () => {
 			}*/ if (!values.firstName){
 				errors.firstName = 'This field is Required';
 
+			} else  if (!values.lastName){
+				errors.lastName = 'This field is Required';
+
+			} else  if (!values.dateOfBirth){
+				errors.dateOfBirth = 'This field is Required';
+
 			} else {
 				const minDate = new Date();
 				minDate.setFullYear(minDate.getFullYear() - 18);
@@ -62,6 +68,10 @@ const Form = () => {
 				if (employeeExists) {
 					setErrors({form: "This employee already exists."});
 					return;
+				}
+
+				if(!values.startDate){
+					values.startDate = new Date();
 				}
 					dispatch(addEmployee(values));
 					setSubmitting(false);
@@ -90,8 +100,9 @@ const Form = () => {
 				}
 				<form
 					onSubmit={formik.handleSubmit}
-					className="mt-6 mb-0 space-y-6 rounded-lg p-8 shadow-2xl"
+					className="mt-6 mb-0 space-y-4 rounded-lg p-6 shadow-2xl"
 				>
+
 					<label
 						htmlFor="firstName"
 						className="text-sm font-medium"
@@ -99,7 +110,7 @@ const Form = () => {
 					<input
 						id="firstName"
 						name="firstName"
-						className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+						className="w-full rounded-lg border-gray-100 border-2 p-4 pr-12 text-sm shadow-sm"
 						type="text"
 						onChange={formik.handleChange}
 						value={formik.values.firstName}
@@ -114,7 +125,7 @@ const Form = () => {
 					<input
 						id="lastName"
 						name="lastName"
-						className="w-full rounded-lg border-gray-50 p-4 pr-12 text-sm shadow-sm"
+						className="w-full rounded-lg border-gray-100 border-2 p-4 pr-12 text-sm shadow-sm"
 						type="text"
 						onChange={formik.handleChange}
 						value={formik.values.lastName}
@@ -129,7 +140,7 @@ const Form = () => {
 					<DatePicker
 						id="dateOfBirth"
 						name="dateOfBirth"
-						className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+						className="w-full rounded-lg border-gray-100 border-2 p-4 pr-12 text-sm shadow-sm"
 						selected={formik.values.dateOfBirth}
 						onChange={date => formik.setFieldValue('dateOfBirth', date)}
 						dateFormat="dd/MM/yyyy"
@@ -145,7 +156,7 @@ const Form = () => {
 					<DatePicker
 						id="startDate"
 						name="startDate"
-						className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+						className="w-full rounded-lg border-gray-100 border-2 p-4 pr-12 text-sm shadow-sm"
 						selected={formik.values.startDate}
 						onChange={date => formik.setFieldValue('startDate', date)}
 						dateFormat="dd/MM/yyyy"
@@ -166,7 +177,7 @@ const Form = () => {
 						<input
 							id="street"
 							name="street"
-							className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+							className="w-full rounded-lg border-gray-100 border-2 p-4 pr-12 text-sm shadow-sm"
 							type="text"
 							onChange={formik.handleChange}
 							value={formik.values.street}
@@ -178,7 +189,7 @@ const Form = () => {
 						<input
 							id="city"
 							name="city"
-							className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+							className="w-full rounded-lg border-gray-100 border-2 p-4 pr-12 text-sm shadow-sm"
 							type="text"
 							onChange={formik.handleChange}
 							value={formik.values.city}
@@ -187,7 +198,7 @@ const Form = () => {
 						<select
 							id="state"
 							name="state"
-							className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+							className="w-full rounded-lg border-gray-100 border-2 p-4 pr-12 text-sm shadow-sm"
 							onChange={formik.handleChange}
 							value={formik.values.state}
 						>
@@ -203,7 +214,7 @@ const Form = () => {
 						<input
 							id="zipCode"
 							name="zipCode"
-							className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+							className="w-full rounded-lg border-gray-100 border-2 p-4 pr-12 text-sm shadow-sm"
 							type="text"
 							pattern="[0-9]*"
 							onChange={formik.handleChange}
@@ -217,7 +228,7 @@ const Form = () => {
 					<select
 						id="department"
 						name="department"
-						className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+						className="w-full rounded-lg border-gray-200 border-2 p-4 pr-12 text-sm shadow-sm"
 						onChange={formik.handleChange}
 						value={formik.values.department}
 					>

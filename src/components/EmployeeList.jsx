@@ -34,7 +34,13 @@ const EmployeeList = () => {
 	};
 
 	const formatDate = (dateString) => {
+		if (!dateString) {
+			return '';
+		}
 		const date = new Date(dateString);
+		if (isNaN(date.getTime())) {
+			return '';
+		}
 		const day = date.getDate().toString().padStart(2, '0');
 		const month = (date.getMonth() + 1).toString().padStart(2, '0');
 		const year = date.getFullYear().toString().substr(-2);
@@ -95,11 +101,15 @@ const EmployeeList = () => {
 	));
 
 	return (
-		<>
+		<div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:px-8">
 			<Form.Group controlId="searchTerm">
-				<Form.Control type="text" placeholder="Search" value={searchTerm} onChange={handleSearch} className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm lg:w-1/2"/>
+				<Form.Control type="text" placeholder="Search"
+				              value={searchTerm}
+				              onChange={handleSearch}
+				              className="w-full rounded-lg p-4 mb-2 text-sm placeholder-indigo-500 shadow-sm lg:w-1/2 border-2 border-gray-100"
+				/>
 			</Form.Group>
-			<Table className="w-full bg-white border-collapse border-gray-300 overflow-hidden"
+			<Table className="w-full bg-white border-collapse rounded-lg border-gray-300 overflow-hidden"
 			       responsive={"lg"}
 			>
 				<thead className="bg-gray-200 text-gray-700">
@@ -150,7 +160,7 @@ const EmployeeList = () => {
 				</tbody>
 			</Table>
 			<Pagination className="flex space-x-2 px-2 py-3">{renderPageNumbers}</Pagination>
-		</>
+		</div>
 	)
 };
 
