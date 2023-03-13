@@ -75,7 +75,7 @@ const Form = () => {
 		}
 	});
 	return (
-		<div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8" data-testid="home-component">
+		<div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
 			<div className="mx-auto max-w-lg">
 				<h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
 					Create Employee
@@ -90,7 +90,7 @@ const Form = () => {
 				}
 				<form
 					onSubmit={formik.handleSubmit}
-					className="mt-6 mb-0 space-y-4 rounded-lg p-8 shadow-2xl"
+					className="mt-6 mb-0 space-y-6 rounded-lg p-8 shadow-2xl"
 				>
 					<label
 						htmlFor="firstName"
@@ -114,7 +114,7 @@ const Form = () => {
 					<input
 						id="lastName"
 						name="lastName"
-						className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+						className="w-full rounded-lg border-gray-50 p-4 pr-12 text-sm shadow-sm"
 						type="text"
 						onChange={formik.handleChange}
 						value={formik.values.lastName}

@@ -97,12 +97,14 @@ const EmployeeList = () => {
 	return (
 		<>
 			<Form.Group controlId="searchTerm">
-				<Form.Control type="text" placeholder="Search" value={searchTerm} onChange={handleSearch}/>
+				<Form.Control type="text" placeholder="Search" value={searchTerm} onChange={handleSearch} className="w-full rounded-lg border-gray-200 p-4 text-sm shadow-sm lg:w-1/2"/>
 			</Form.Group>
-			<Table className="w-full bg-white border-collapse border-gray-300 overflow-hidden">
+			<Table className="w-full bg-white border-collapse border-gray-300 overflow-hidden"
+			       responsive={"lg"}
+			>
 				<thead className="bg-gray-200 text-gray-700">
 				<tr>
-					<th className="font-medium py-2 px-3 text-left" onClick={() => handleSort('firstName')}>
+					<th className="font-medium py-2 px-3 text-left " onClick={() => handleSort('firstName')}>
 						First Name {sortColumn === 'firstName' && <span>{sortOrder === 'asc' ? '▲' : '▼'}</span>}
 					</th>
 					<th className="font-medium py-2 px-3 text-left" onClick={() => handleSort('lastName')}>
@@ -147,7 +149,7 @@ const EmployeeList = () => {
 				))}
 				</tbody>
 			</Table>
-			<Pagination className="flex space-x-2">{renderPageNumbers}</Pagination>
+			<Pagination className="flex space-x-2 px-2 py-3">{renderPageNumbers}</Pagination>
 		</>
 	)
 };
