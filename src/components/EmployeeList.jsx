@@ -10,7 +10,7 @@ const EmployeeList = () => {
 	// Set up the current page to be displayed initially as page 1
 	const [currentPage, setCurrentPage] = useState(1);
 	// Set up the number of employees to be displayed per page to 5
-	const [employeesPerPage] = useState(5);
+	const [employeesPerPage, setEmployeesPerPage] = useState(5);
 	// Set up the search term for filtering employees initially as an empty string
 	const [searchTerm, setSearchTerm] = useState('');
 	// Set up the initial sort order to be ascending
@@ -102,6 +102,19 @@ const EmployeeList = () => {
 
 	return (
 		<div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:px-8">
+			<Form.Group controlId="employeesPerPage" className="flex items-center space-x-2">
+				<Form.Label className="text-gray-700 font-medium text-sm">Show</Form.Label>
+				<Form.Control
+					as="select"
+					value={employeesPerPage}
+					onChange={(event) => setEmployeesPerPage(Number(event.target.value))}
+					className="rounded-lg p-2 text-sm placeholder-indigo-500 shadow-sm border-2 border-gray-100">
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="15">15</option>
+				</Form.Control>
+				<Form.Label className="text-gray-700 font-medium text-sm">entries</Form.Label>
+			</Form.Group>
 			<Form.Group controlId="searchTerm">
 				<Form.Control type="text" placeholder="Search"
 				              value={searchTerm}
