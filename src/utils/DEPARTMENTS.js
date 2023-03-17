@@ -4,6 +4,6 @@ const DEPARTMENTS = [
 	{"name": "Engineering"},
 	{"name": "Human Resources"},
 	{"name": "Legal"},
-]
+];
 
 export default DEPARTMENTS;

@@ -1,3 +1,4 @@
+import React from "react";
 import {Link, useLocation} from "react-router-dom";
 
 const HRHeader = () => {
@@ -29,6 +30,6 @@ const HRHeader = () => {
 				</div>
 			</header>
 		</>
-	)
+	);
 };
 export default HRHeader;

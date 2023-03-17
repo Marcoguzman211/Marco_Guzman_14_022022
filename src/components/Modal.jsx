@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
 const Modal = ({ onClose, employeeName }) => {
 	return (
@@ -35,3 +36,8 @@ const Modal = ({ onClose, employeeName }) => {
 };
 
 export default Modal;
+
+Modal.propTypes = {
+	onClose: PropTypes.func.isRequired,
+	employeeName: PropTypes.string.isRequired
+};

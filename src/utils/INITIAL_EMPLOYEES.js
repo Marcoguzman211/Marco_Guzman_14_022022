@@ -45,7 +45,7 @@ const INITIAL_EMPLOYEES = [
 	},
 	{
 		firstName: "Maxime",
-			lastName: "Mercier",
+		lastName: "Mercier",
 		dateOfBirth: "1989-09-10T18:01:37Z",
 		startDate: "2022-02-28T08:30:00Z",
 		street: "9421 Maple Road",
@@ -56,7 +56,7 @@ const INITIAL_EMPLOYEES = [
 	},
 	{
 		firstName: "Chloé",
-			lastName: "Bouchard",
+		lastName: "Bouchard",
 		dateOfBirth: "1991-11-23T13:55:19Z",
 		startDate: "2020-08-01T09:00:00Z",
 		street: "2200 Elm Avenue",
@@ -67,7 +67,7 @@ const INITIAL_EMPLOYEES = [
 	},
 	{
 		firstName: "Nicolas",
-			lastName: "Dubois",
+		lastName: "Dubois",
 		dateOfBirth: "1994-03-07T21:45:12Z",
 		startDate: "2021-05-01T08:30:00Z",
 		street: "2800 Cedar Lane",
@@ -78,7 +78,7 @@ const INITIAL_EMPLOYEES = [
 	},
 	{
 		firstName: "Céline",
-			lastName: "Laroche",
+		lastName: "Laroche",
 		dateOfBirth: "1988-12-30T07:10:56Z",
 		startDate: "2022-01-02T09:00:00Z",
 		street: "6521 Oak Street",
@@ -89,7 +89,7 @@ const INITIAL_EMPLOYEES = [
 	},
 	{
 		firstName: "Antoine",
-			lastName: "Berger",
+		lastName: "Berger",
 		dateOfBirth: "1993-08-01T11:20:30Z",
 		startDate: "2021-09-01T09:00:00Z",
 		street: "4600 Chestnut Avenue",
