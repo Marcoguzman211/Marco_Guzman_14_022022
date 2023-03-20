@@ -63,8 +63,8 @@ function EmployeeList() {
 	/* This code is sorting an array of employees based on a selected column and a selected sort order.
 	* */
 	const sortedEmployees = filterEmployees(allEmployees).sort((a, b) => {
-		const columnA = a[sortColumn].toLowerCase();
-		const columnB = b[sortColumn].toLowerCase();
+		const columnA = String(a[sortColumn]).toLowerCase();
+		const columnB = String(b[sortColumn]).toLowerCase();
 		if (columnA < columnB) {
 			return sortOrder === "asc" ? -1 : 1;
 		}
