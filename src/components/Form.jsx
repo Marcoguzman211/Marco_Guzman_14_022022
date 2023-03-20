@@ -8,6 +8,7 @@ import US_STATES from "../utils/US_STATES";
 import DEPARTMENTS from "../utils/DEPARTMENTS";
 import { addEmployee } from "../feature/employeeSlice";
 import { Modal } from "hrnet-modal-marco-guzman";
+import Select from "react-select/base";
 
 
 function Form() {
@@ -227,18 +228,18 @@ function Form() {
 						)}
 					</fieldset>
 					<label htmlFor="department" className="text-sm font-medium">Department</label>
-					<select
+					{/*<select
 						id="department"
 						name="department"
 						className="w-full rounded-lg border-gray-200 border-2 p-4 pr-12 text-sm shadow-sm"
 						onChange={formik.handleChange}
 						value={formik.values.department}
 					>
-						{/* <option value="">Department</option> */}
 						{DEPARTMENTS.map((department) => (
 							<option key={department.name} value={department.name}>{department.name}</option>
 						))}
-					</select>
+					</select>*/}
+					<Select id="department" name="department" onChange={formik.handleChange} value={DEPARTMENTS}/>
 					{formik.errors.department && formik.touched.department && (
 						<div className="text-red-500 text-sm">{formik.errors.department}</div>
 					)}
