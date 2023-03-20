@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 import US_STATES from "../utils/US_STATES";
 import DEPARTMENTS from "../utils/DEPARTMENTS";
 import { addEmployee } from "../feature/employeeSlice";
-/* import Modal from "./Modal"; */
-import Modal from "./Modal";
+import { Modal } from "hrnet-modal-marco-guzman";
+
 
 function Form() {
 	const allEmployees = useSelector((state) => state.employees.employees);
@@ -84,6 +84,8 @@ function Form() {
 				{showModal && (
 					<Modal
 						setShowModal={setShowModal}
+						headerText={"New employee created successfully!"}
+						buttonText={"Go to Employee List"}
 						employeeName={`${formik.values.firstName} ${formik.values.lastName}`}
 						onClose={() => { setShowModal(false); navigate("/employees");}}
 					/>

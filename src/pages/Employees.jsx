@@ -10,6 +10,7 @@ const Employees = () => {
 			<EmployeeList />
 			<Footer />
 		</div>
+
 	);
 };
 
