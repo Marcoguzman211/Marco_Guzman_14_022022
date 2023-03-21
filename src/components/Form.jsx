@@ -8,7 +8,8 @@ import US_STATES from "../utils/US_STATES";
 import DEPARTMENTS from "../utils/DEPARTMENTS";
 import { addEmployee } from "../feature/employeeSlice";
 import { Modal } from "hrnet-modal-marco-guzman";
-import Select from "react-select/base";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 
 
 function Form() {
@@ -198,18 +199,17 @@ function Form() {
 							value={formik.values.city}
 						/>
 						<label htmlFor="state" className="text-sm font-medium">State</label>
-						<select
+						<Dropdown
 							id="state"
 							name="state"
-							className="w-full rounded-lg border-gray-100 border-2 p-4 pr-12 text-sm shadow-sm"
-							onChange={formik.handleChange}
-							value={formik.values.state}
-						>
-							<option value="">Select a state</option>
-							{US_STATES.map((state) => (
-								<option key={state.abbreviation} value={state.name}>{state.name}</option>
-							))}
-						</select>
+							options={US_STATES.map((state) => state.name)}
+							onChange={(selectedOption) =>
+								formik.setFieldValue("state", selectedOption.value)
+							}
+							value={formik.values.department}
+							placeholder="Select a department"
+							controlClassName="w-full rounded-lg border-gray-100 border-2 p-4 pr-12 text-sm shadow-sm"
+						/>
 						{formik.errors.state && formik.touched.state && (
 							<div className="text-red-500 text-sm">{formik.errors.state}</div>
 						)}
@@ -228,18 +228,17 @@ function Form() {
 						)}
 					</fieldset>
 					<label htmlFor="department" className="text-sm font-medium">Department</label>
-					{/*<select
+					<Dropdown
 						id="department"
 						name="department"
-						className="w-full rounded-lg border-gray-200 border-2 p-4 pr-12 text-sm shadow-sm"
-						onChange={formik.handleChange}
+						options={DEPARTMENTS.map((department) => department.name)}
+						onChange={(selectedOption) =>
+							formik.setFieldValue("department", selectedOption.value)
+						}
 						value={formik.values.department}
-					>
-						{DEPARTMENTS.map((department) => (
-							<option key={department.name} value={department.name}>{department.name}</option>
-						))}
-					</select>*/}
-					<Select id="department" name="department" onChange={formik.handleChange} value={DEPARTMENTS}/>
+						placeholder="Select a department"
+						controlClassName="w-full rounded-lg border-gray-100 border-2 p-4 pr-12 text-sm shadow-sm"
+					/>
 					{formik.errors.department && formik.touched.department && (
 						<div className="text-red-500 text-sm">{formik.errors.department}</div>
 					)}

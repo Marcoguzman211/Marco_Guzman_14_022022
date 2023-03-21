@@ -101,9 +101,9 @@ function EmployeeList() {
 
 	return (
 		<div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:px-8">
-			<div className="flex flex-wrap items-center">
-				<Form.Group controlId="employeesPerPage" className="flex items-center space-x-2">
-					<Form.Label className="text-gray-700 font-medium text-sm">Show</Form.Label>
+			<div className="flex flex-wrap items-center mb-2">
+				<Form.Group controlId="employeesPerPage" className="flex items-center">
+					<Form.Label className="text-indigo-500 font-medium text-sm mr-1">Show</Form.Label>
 					<Form.Control
 						as="select"
 						value={employeesPerPage}
@@ -114,7 +114,6 @@ function EmployeeList() {
 						<option value="10">10</option>
 						<option value="15">15</option>
 					</Form.Control>
-					{/* <Form.Label className="text-gray-700 font-medium text-sm">entries</Form.Label> */}
 				</Form.Group>
 				<Form.Group controlId="searchTerm" className="w-full lg:w-auto mb-2 lg:mb-0 pl-2">
 					<Form.Control
@@ -122,7 +121,7 @@ function EmployeeList() {
 						placeholder="Search"
 						value={searchTerm}
 						onChange={handleSearch}
-						className="w-full rounded-lg p-4 mb-2 text-sm placeholder-indigo-500 shadow-sm border-2 border-gray-100"
+						className="w-full rounded-lg p-2 text-sm placeholder-indigo-500 shadow-sm border-2 border-gray-100"
 					/>
 				</Form.Group>
 			</div>
