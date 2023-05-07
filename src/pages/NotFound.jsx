@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
+/*Simple error page whenever any page doesn't exist*/
 const NotFound = () => {
 	return (
 		<div className="grid h-screen px-4 bg-white place-content-center">

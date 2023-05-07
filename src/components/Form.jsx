@@ -13,11 +13,17 @@ import "react-dropdown/style.css";
 
 
 function Form() {
+	// Use selector to get all employees from the Redux store
 	const allEmployees = useSelector((state) => state.employees.employees);
+	// Use the useNavigate hook for navigation
 	const navigate = useNavigate();
+	// Use the useState hook to manage the display of the modal
 	const [showModal, setShowModal] = useState(false);
+	// Use useDispatch hook to dispatch actions to the Redux store
 	const dispatch = useDispatch();
+	// Initialize useFormik to handle forms
 	const formik = useFormik({
+		// Define initial values for form fields
 		initialValues: {
 			firstName: "",
 			lastName: "",
@@ -31,6 +37,7 @@ function Form() {
 			department: "",
 
 		},
+		// Validation function to check for errors in form values
 		validate: (values) => {
 			const errors = {};
 			if (!values.firstName) {
@@ -52,6 +59,7 @@ function Form() {
 			}
 			return errors;
 		},
+		// Check if fields are empty and add errors if needed
 		onSubmit: (values, { setSubmitting, setErrors }) => {
 			try {
 				// Check if employee already exists
@@ -77,6 +85,7 @@ function Form() {
 			}
 		},
 	});
+	// Return the form
 	return (
 		<div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
 			<div className="mx-auto max-w-lg">
@@ -206,7 +215,7 @@ function Form() {
 							onChange={(selectedOption) =>
 								formik.setFieldValue("state", selectedOption.value)
 							}
-							value={formik.values.department}
+							value={formik.values.state}
 							placeholder="Select a department"
 							controlClassName="w-full rounded-lg border-gray-100 border-2 p-4 pr-12 text-sm shadow-sm"
 						/>

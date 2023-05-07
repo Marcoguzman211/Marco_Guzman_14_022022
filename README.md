@@ -1,9 +1,10 @@
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) 
 ![REACT-ROUTER](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) ![REDUX](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
 
 # Wealth-Health
-
-
+This is a project for the technology department of a large financial company called WealthHealth. 
+This company uses an internal web application named HRnet to manage employee records. 
+However, the application is old and uses jQuery on the front end, which leads to significant bugs and increased internal complaints.
 
 ## Author
 
@@ -11,38 +12,31 @@ Marco Guzman
 
 ## Technologies and dependencies
 
-- HTML5
-- CSS
-- Sass
+
+- React
+- TailwindCSS
 - Javascript
 - Node.js
-- React
-- React-dom
 - React-router-dom
 - Redux
+- Formik
+- hrnet-modal-marco-guzman
+- React Bootstrap
+- react-datepicker
+- react-dropdown
 
 ## How to install
 
-### On your computer
+### On your terminal
 
-- Create main directory:
-
-- Clone project P9-front-end-dashboard from Github into your computer. This repo contains all the source code to run the API for the analytics of the dashboard page:
+- Clone project :
 
 ```console
-$ git clone https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard
+$ git clone https://github.com/Marcoguzman211/Marco_Guzman_14_022022
 ```
 
-### On the terminal
+- Change directory to the cloned project
 
-- Change directory to cd P9-front-end-dashboard
-- npm command to install the dependencies:
-
-- Clone the original project:
-
-```console
-$ git clone https://github.com/OpenClassrooms-Student-Center/P12_Front-end
-```
 
 - Install dependencies:
 
@@ -54,15 +48,4 @@ $ npm install
 
 ```console
 $ npm start
-```
-
-- Keep terminal open
-- Launch React app on new port http://localhost:3000
-
-```
-
-## URLs
-
-Front-end : http://localhost:3000
-Back-end : http://localhost:3001
 ```
